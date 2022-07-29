@@ -22,7 +22,34 @@ func (s *setupHelper) Run() error {
 		return err
 	}
 	s.InstallInteractive()
+	s.InstallManual()
 	return nil
+}
+
+func (s *setupHelper) InstallManual() {
+	apps := s.Config.Applications.Manual
+	if len(apps) == 0 {
+		log.Info().Msg("No manual install defined. Skipping")
+		return
+	}
+	log.Info().Msg("Showing list of applictions to install manualy. Right click on the links to open the browser")
+	for _, app := range apps {
+		fmt.Println()
+		fmt.Println(fmt.Sprintf("\tApplication: %s", app.Name))
+		fmt.Println(fmt.Sprintf("\tHome: %s", app.Home))
+		fmt.Println()
+	}
+	keepGoing := false
+	for {
+		time.Sleep(3000)
+		promt := &survey.Confirm{
+			Message: "Is installation done. Want to continue to?",
+		}
+		survey.AskOne(promt, &keepGoing)
+		if keepGoing {
+			break
+		}
+	}
 }
 
 func (s *setupHelper) InstallInteractive() {
