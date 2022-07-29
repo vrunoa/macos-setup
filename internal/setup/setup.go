@@ -5,6 +5,7 @@ import (
 	"io"
 	"os"
 	"path"
+	"time"
 
 	"github.com/AlecAivazis/survey/v2"
 	"github.com/rs/zerolog/log"
@@ -20,13 +21,42 @@ func (s *setupHelper) Run() error {
 	if err != nil {
 		return err
 	}
+	s.InstallInteractive()
 	return nil
+}
+
+func (s *setupHelper) InstallInteractive() {
+	apps := s.Config.Applications.Interactive
+	if len(apps) == 0 {
+		log.Info().Msg("No interactive install defined. Skipping")
+		return
+	}
+	log.Info().Msg("Found interactive installs. Open a new terminal to run some commands")
+	for _, app := range apps {
+		fmt.Println()
+		fmt.Println(fmt.Sprintf("\tApplication: %s", app.Name))
+		fmt.Println(fmt.Sprintf("\tHome: %s", app.Home))
+		fmt.Println("\tCommand:")
+		fmt.Println(fmt.Sprintf("\t%s", app.Cmd))
+		fmt.Println()
+		keepGoing := false
+		for {
+			time.Sleep(3000)
+			promt := &survey.Confirm{
+				Message: "Is installation done. Want to continue to?",
+			}
+			survey.AskOne(promt, &keepGoing)
+			if keepGoing {
+				break
+			}
+		}
+	}
 }
 
 func (s *setupHelper) CopyFiles() error {
 	files := s.Config.Files
 	if len(files) == 0 {
-		log.Info().Msg("No user files found. Skipping copy")
+		log.Info().Msg("No user files defined. Skipping copy")
 		return nil
 	}
 	log.Info().Msg("Found user files")
