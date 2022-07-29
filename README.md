@@ -1,4 +1,4 @@
-# A guide to setup a new laptop
+# A helper to setup a new laptop
 
 ## Requirements
 
