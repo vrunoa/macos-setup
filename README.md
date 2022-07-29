@@ -11,7 +11,7 @@ Once installed the minimal requirements
 
 ```bash
 git clone git@github.com:vrunoa/macos-setup.git
-cd dotfiles
+cd macos-setup
 go mod tidy
 ```
 
