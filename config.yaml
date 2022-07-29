@@ -22,8 +22,6 @@ applications:
       home: https://slack.com/downloads/mac
     - name: zoom
       home: https://zoom.us/download
-    - name: 1password
-      home: https://1password.com/downloads/mac/
     - name: spotify
       home: https://www.spotify.com/us/download/mac/
     - name: Android Studio
