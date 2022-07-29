@@ -3,11 +3,6 @@
 ## Requirements
 
 * [chrome](https://www.google.ca/chrome/)
-* [brew](https://brew.sh/)
-
-```bash
-/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
-```
 * [golang](https://go.dev/doc/install)
 
 ## Setup
@@ -23,5 +18,5 @@ go mod tidy
 ## Installing brew packages
 
 ```bash
-go run cmd/macos-setup/macos-setup.go install -c brew.yaml
+go run cmd/macos-setup/macos-setup.go setup -c config.yaml
 ```

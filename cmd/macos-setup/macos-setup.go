@@ -9,7 +9,10 @@ import (
 	"github.com/spf13/cobra"
 
 	"github.com/vrunoa/macos-setup/internal/brew"
+	"github.com/vrunoa/macos-setup/internal/config"
 	"github.com/vrunoa/macos-setup/internal/exec"
+	"github.com/vrunoa/macos-setup/internal/setup"
+	"github.com/vrunoa/macos-setup/internal/ui"
 	"github.com/vrunoa/macos-setup/internal/version"
 )
 
@@ -40,6 +43,25 @@ func installCommand(commander exec.Cmd) *cobra.Command {
 	return cmd
 }
 
+func setupCommand(commander exec.Cmd) *cobra.Command {
+	cmd := &cobra.Command{
+		Use:   "setup",
+		Short: "setup",
+		Run: func(cmd *cobra.Command, args []string) {
+			cfg, err := config.New(configFile)
+			if err != nil {
+				log.Fatal().Err(err).Msg("failed to read config file")
+			}
+			log.Info().Msg("Welcome to your setup helper")
+			fmt.Println(ui.Floppy)
+			setupHelper := setup.New(cfg)
+			setupHelper.Run()
+		},
+	}
+	cmd.Flags().StringVarP(&configFile, "config-file", "c", "", "config-file")
+	return cmd
+}
+
 func uninstallCommand(commander exec.Cmd) *cobra.Command {
 	cmd := &cobra.Command{
 		Use:   "uninstall",
@@ -64,6 +86,7 @@ func main() {
 		Short:   "CLI tool for setting up your macOS laptop",
 		Version: fmt.Sprintf("%s\n(build %s)", version.Version, version.GitCommit),
 	}
+	mainCmd.AddCommand(setupCommand(commander))
 	mainCmd.AddCommand(installCommand(commander))
 	mainCmd.AddCommand(uninstallCommand(commander))
 	if err := mainCmd.Execute(); err != nil {
