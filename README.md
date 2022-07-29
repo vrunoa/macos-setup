@@ -15,7 +15,7 @@ cd macos-setup
 go mod tidy
 ```
 
-## Installing brew packages
+## Run helper
 
 ```bash
 go run cmd/macos-setup/macos-setup.go setup -c config.yaml
