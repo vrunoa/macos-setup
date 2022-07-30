@@ -30,6 +30,8 @@ applications:
       home: https://www.jetbrains.com/go/download/#section=mac
     - name: Xcode
       home: https://apps.apple.com/us/app/xcode/id497799835?mt=12
+    - name: remarkable
+      home: https://my.remarkable.com/device/desktop
 brew:
   formulas:
     - wget
