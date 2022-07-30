@@ -18,5 +18,5 @@ go mod tidy
 ## Run helper
 
 ```bash
-go run cmd/macos-setup/macos-setup.go setup -c config.yaml
+go run cmd/macos-setup/macos-setup.go setup -c example/config.yaml
 ```

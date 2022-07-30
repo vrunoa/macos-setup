@@ -1,0 +1,34 @@
+apiVersion: v1Alpha
+kind: macos-setup
+files:
+  - .gitconfig
+  - .gitignore
+  - .vimrc
+  - .zshrc
+applications:
+  interactive:
+    - name: brew
+      cmd: /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+      home: https://brew.sh/
+    - name: nvm
+      cmd: curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.1/install.sh | bash
+      home: https://github.com/nvm-sh/nvm
+  manual:
+    - name: iterm2
+      home: https://iterm2.com/
+    - name: docker
+      home: https://www.docker.com/products/docker-desktop/
+brew:
+  formulas:
+    - wget
+    - watch
+    - stern
+    - tilt
+nvm:
+  nodeVersions:
+    - v16.16.0
+npm:
+  packages:
+    - go-ios
+    - git-open
+
