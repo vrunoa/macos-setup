@@ -3,6 +3,8 @@ package brew
 import (
 	"reflect"
 	"testing"
+
+	"github.com/vrunoa/macos-setup/internal/config"
 )
 
 type fakeCommander struct {
@@ -26,8 +28,10 @@ func TestInstall(t *testing.T) {
 		},
 	}
 	b := &brew{
-		Config: Config{
-			Formula: []string{"some-package"},
+		Config: config.Config{
+			Brew: config.Brew{
+				Formulas: []string{"some-package"},
+			},
 		},
 		Commander: commander,
 	}
@@ -58,8 +62,10 @@ func TestUninstall(t *testing.T) {
 		},
 	}
 	b := &brew{
-		Config: Config{
-			Formula: []string{"some-package"},
+		Config: config.Config{
+			Brew: config.Brew{
+				Formulas: []string{"some-package"},
+			},
 		},
 		Commander: commander,
 	}

@@ -2,35 +2,35 @@ package config
 
 import "github.com/vrunoa/macos-setup/internal/yaml"
 
-type application struct {
+type Application struct {
 	Name string `yaml:"name"`
 	Cmd  string `yaml:"cmd,omitempty"`
 	Home string `yaml:"home"`
 }
 
-type applications struct {
-	Interactive []application `yaml:"interactive"`
-	Manual      []application `yaml:"manual"`
+type Applications struct {
+	Interactive []Application `yaml:"interactive"`
+	Manual      []Application `yaml:"manual"`
 }
 
-type brew struct {
+type Brew struct {
 	Formulas []string `yaml:"formulas"`
 }
 
-type nvm struct {
+type NVM struct {
 	Node []string `yaml:"nodeVersions"`
 }
 
-type npm struct {
+type NPM struct {
 	Packages []string `yaml:"packages"`
 }
 
 type Config struct {
 	Files        []string     `yaml:"files"`
-	Applications applications `yaml:"applications"`
-	Brew         brew         `yaml:"brew"`
-	NVM          nvm          `yaml:"nvm"`
-	NPM          npm          `yaml:"npm"`
+	Applications Applications `yaml:"applications"`
+	Brew         Brew         `yaml:"brew"`
+	NVM          NVM          `yaml:"nvm"`
+	NPM          NPM          `yaml:"npm"`
 }
 
 func New(configFile string) (*Config, error) {

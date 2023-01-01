@@ -33,6 +33,7 @@ func installCommand(commander exec.Cmd) *cobra.Command {
 		Short: "install",
 		Run: func(cmd *cobra.Command, args []string) {
 			brew, err := brew.New(commander, configFile)
+			fmt.Println(brew)
 			if err != nil {
 				log.Fatal().Err(err).Msg("failed to setup brew")
 			}
@@ -53,7 +54,8 @@ func setupCommand(commander exec.Cmd) *cobra.Command {
 				log.Fatal().Err(err).Msg("failed to read config file")
 			}
 			log.Info().Msg("Welcome to your setup helper")
-			fmt.Println(ui.Floppy)
+			fmt.Print(ui.Floppy)
+			fmt.Println()
 			setupHelper := setup.New(cfg)
 			setupHelper.Run()
 		},

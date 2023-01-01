@@ -2,21 +2,18 @@ package brew
 
 import (
 	"github.com/rs/zerolog/log"
+	"github.com/vrunoa/macos-setup/internal/config"
 	"github.com/vrunoa/macos-setup/internal/exec"
 	"github.com/vrunoa/macos-setup/internal/yaml"
 )
 
-type Config struct {
-	Formula []string `yaml:"formula"`
-}
-
 type brew struct {
-	Config    Config
+	Config    config.Config
 	Commander exec.Cmd
 }
 
 func (b *brew) getFormulas() []string {
-	return b.Config.Formula
+	return b.Config.Brew.Formulas
 }
 
 func (b *brew) UninstallFormulas() {
@@ -52,7 +49,7 @@ func New(commander exec.Cmd, configFile string) (*brew, error) {
 	if err != nil {
 		return nil, err
 	}
-	var config Config
+	var config config.Config
 	err = yaml.ReadYaml(&config, configFile)
 	if err != nil {
 		return nil, err
