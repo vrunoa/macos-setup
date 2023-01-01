@@ -53,7 +53,8 @@ func setupCommand(commander exec.Cmd) *cobra.Command {
 				log.Fatal().Err(err).Msg("failed to read config file")
 			}
 			log.Info().Msg("Welcome to your setup helper")
-			fmt.Println(ui.Floppy)
+			fmt.Print(ui.Floppy)
+			fmt.Println()
 			setupHelper := setup.New(cfg)
 			setupHelper.Run()
 		},

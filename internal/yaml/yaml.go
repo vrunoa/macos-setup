@@ -16,7 +16,6 @@ func ReadYaml(c interface{}, filePath string) error {
 		return err
 	}
 	defer f.Close()
-
 	err = yaml.NewDecoder(f).Decode(c)
 	if err != nil {
 		return err
