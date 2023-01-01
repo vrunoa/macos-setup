@@ -33,7 +33,6 @@ func installCommand(commander exec.Cmd) *cobra.Command {
 		Short: "install",
 		Run: func(cmd *cobra.Command, args []string) {
 			brew, err := brew.New(commander, configFile)
-			fmt.Println(brew)
 			if err != nil {
 				log.Fatal().Err(err).Msg("failed to setup brew")
 			}
